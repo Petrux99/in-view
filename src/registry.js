@@ -15,6 +15,10 @@ class inViewRegistry {
         this.singles  = { enter: [], exit: [] };
     }
 
+    setOptions(options) {
+        this.options = options;
+    }
+
     /**
     * Check each element in the registry, if an element
     * changes states, fire an event and operate on current.

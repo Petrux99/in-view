@@ -58,21 +58,22 @@ const inView = () => {
     * The main interface. Take a selector and retrieve
     * the associated registry or create a new one.
     */
-    let control = (selector) => {
+    let control = (selector, _options) => {
 
         if (typeof selector !== 'string') return;
 
         // Get an up-to-date list of elements.
         let elements = [].slice.call(document.querySelectorAll(selector));
 
-        // If the registry exists, update the elements.
+        // If the registry exists, update the elements and the options.
         if (selectors.history.indexOf(selector) > -1) {
             selectors[selector].elements = elements;
+            selectors[selector].setOptions(Object.assign({}, options, _options))
         }
 
         // If it doesn't exist, create a new registry.
         else {
-            selectors[selector] = Registry(elements, options);
+            selectors[selector] = Registry(elements, Object.assign({}, options, _options));
             selectors.history.push(selector);
         }
 
